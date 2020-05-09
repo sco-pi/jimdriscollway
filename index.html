@@ -77,6 +77,17 @@
             textElm.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
 
         }
+
+        
+    (function() {
+        var age = document.getElementById('unitNumber');
+        age.addEventListener('keypress', function(event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                findAddressByNumber()
+            }
+        });
+    }());
     </script>
     <script type="text/javascript">
         var addresses = {
