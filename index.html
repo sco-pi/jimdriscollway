@@ -102,6 +102,12 @@
     var svgDoc = document.getElementById("svgMap");
     svgDoc.addEventListener('load', function(){
         clearMap("svgMap");
+        var defaultNumber = location.hash.substr(1),
+		    defaultNumberInt = parseInt(defaultNumber);
+        if ( defaultNumberInt > 0 && defaultNumberInt < 100 ) {
+            document.getElementById("unitNumber").value = defaultNumber
+            findAddressByNumber()
+        }
     });
     </script>
     <script type="text/javascript">
