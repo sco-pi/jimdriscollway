@@ -58,13 +58,7 @@
                 textElm = ctx.getElementById(svgTextID),
                 SVGRect = textElm.getBBox();
 
-            var rectangle = ctx.getElementById('svgHighlightRect');
-            if (typeof (rectangle) != 'undefined' && rectangle != null) {
-                var parent = rectangle.parentNode;
-                parent.removeChild(rectangle);
-            } else {
-                console.log("Unable to find 'svgHighlightRect'")
-            }
+            clearMap(svgDocID);
 
             var rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
             rect.setAttribute("id", "svgHighlightRect");
@@ -76,6 +70,22 @@
             textElm.parentNode.insertBefore(rect, textElm);
             textElm.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
 
+            var svgArrowID = "PathTo" + svgTextID.split("_")[1]
+            pathElm = ctx.getElementById(svgArrowID),
+            pathElm.style.display = "block";
+        }
+
+        function clearMap(svgDocID) {
+            var ctx = document.getElementById(svgDocID).contentDocument
+                rectangle = ctx.getElementById('svgHighlightRect');
+            if (typeof (rectangle) != 'undefined' && rectangle != null) {
+                var parent = rectangle.parentNode;
+                parent.removeChild(rectangle);
+            }
+            
+            // Hide all paths
+		    var paths = ctx.querySelectorAll('[id^=PathTo]');
+        	paths.forEach(path => path.style.display = "none");
         }
 
         
@@ -88,6 +98,11 @@
             }
         });
     }());
+
+    var svgDoc = document.getElementById("svgMap");
+    svgDoc.addEventListener('load', function(){
+        clearMap("svgMap");
+    });
     </script>
     <script type="text/javascript">
         var addresses = {
@@ -95,6 +110,14 @@
             "2": "number_2",
             "3": "number_3",
             "4": "number_4",
+            "5": "number_B1C1",
+            "6": "number_B1C1",
+            "7": "number_B1C1",
+            "8": "number_B1C1",
+            "9": "number_B1C1",
+            "10": "number_B1C1",
+            "11": "number_B1C1",
+            "12": "number_B1C1",
             "13": "number_13",
             "14": "number_14",
             "15": "number_15",
@@ -102,6 +125,22 @@
             "17": "number_17",
             "18": "number_18",
             "19": "number_19",
+            "20": "number_B2C2",
+            "21": "number_B2C2",
+            "22": "number_B2C1",
+            "23": "number_B2C1",
+            "24": "number_B2C1",
+            "25": "number_B2C2",
+            "26": "number_B2C2",
+            "27": "number_B2C1",
+            "28": "number_B2C1",
+            "29": "number_B2C1",
+            "30": "number_B2C2",
+            "31": "number_B2C2",
+            "32": "number_B3C1",
+            "33": "number_B3C1",
+            "34": "number_B3C1",
+            "35": "number_B3C1",
             "36": "number_36",
             "37": "number_37",
             "38": "number_38",
@@ -109,43 +148,63 @@
             "40": "number_40",
             "41": "number_41",
             "42": "number_42",
-            "43": "number_43-59",
-            "44": "number_43-59",
-            "45": "number_43-59",
-            "46": "number_43-59",
-            "47": "number_43-59",
-            "48": "number_43-59",
-            "49": "number_43-59",
-            "50": "number_43-59",
-            "51": "number_43-59",
-            "52": "number_43-59",
-            "53": "number_43-59",
-            "54": "number_43-59",
-            "55": "number_43-59",
-            "56": "number_43-59",
-            "57": "number_43-59",
-            "58": "number_43-59",
-            "59": "number_43-59",
+            "43": "number_B4C2",
+            "44": "number_B4C2",
+            "45": "number_B4C1",
+            "46": "number_B4C1",
+            "47": "number_B4C1",
+            "48": "number_B4C2",
+            "49": "number_B4C2",
+            "50": "number_B4C1",
+            "51": "number_B4C1",
+            "52": "number_B4C1",
+            "53": "number_B4C2",
+            "54": "number_B4C2",
+            "55": "number_B4C1",
+            "56": "number_B4C1",
+            "57": "number_B4C1",
+            "58": "number_B4C2",
+            "59": "number_B4C2",
             "60": "number_60",
             "61": "number_61",
             "62": "number_62",
             "63": "number_63",
-            "64": "number_64-74",
-            "65": "number_64-74",
-            "66": "number_64-74",
-            "67": "number_64-74",
-            "68": "number_64-74",
-            "69": "number_64-74",
-            "70": "number_64-74",
-            "71": "number_64-74",
-            "72": "number_64-74",
-            "73": "number_64-74",
-            "74": "number_64-74",
+            "64": "number_B5C1",
+            "65": "number_B5C1",
+            "66": "number_B5C1",
+            "67": "number_B5C1",
+            "68": "number_B5C1",
+            "69": "number_B5C1",
+            "70": "number_B5C1",
+            "71": "number_B5C1",
+            "72": "number_B5C1",
+            "73": "number_B5C1",
+            "74": "number_B5C1",
+            "75": "number_75",
+            "76": "number_76",
             "77": "number_77",
             "78": "number_78",
             "79": "number_79",
             "80": "number_80",
-            "81": "number_81"
+            "81": "number_81",
+            "82": "number_B6C2",
+            "83": "number_B6C2",
+            "84": "number_B6C1",
+            "85": "number_B6C1",
+            "86": "number_B6C1",
+            "87": "number_B6C2",
+            "88": "number_B6C2",
+            "89": "number_B6C1",
+            "90": "number_B6C1",
+            "91": "number_B6C1",
+            "92": "number_B6C2",
+            "93": "number_B6C2",
+            "94": "number_B6C1",
+            "95": "number_B6C1",
+            "96": "number_B6C1",
+            "97": "number_B6C2",
+            "98": "number_B6C2",
+            "99": "number_B6C2"
         };
     </script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
